@@ -1,2 +1,2 @@
 # puc-minas
-Coursework, projects, and assignments developed throughout my Computer Science degree at PUC Minas.
+Coursework, projects, and practical assignments (known as *Trabalhos Práticos*, or "TPs") developed throughout my Computer Science degree at PUC Minas.
