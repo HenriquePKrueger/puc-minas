@@ -50,7 +50,7 @@ void parseCombustivel(char *s, Veiculo *vehicle){
     char *fuel = strtok(s, ";");
     int column = 0;
 
-    while (fuel != NULL){
+    while(fuel != NULL){
         strcpy(vehicle->combustivel[column], fuel);
         column++;
         fuel = strtok(NULL, ";");
@@ -100,7 +100,7 @@ void format(Veiculo *vehicle, char *formatted){
     char data[20];
     int column = 0;
 
-    while (vehicle->combustivel[column][0] != '\0'){
+    while(vehicle->combustivel[column][0] != '\0'){
         if (column > 0){
             strcat(combustivel, ",");
         }
@@ -136,7 +136,7 @@ Veiculo **ler(char *caminhoArquivo){
 
     FILE *file = fopen(caminhoArquivo, "r");
 
-    if (file == NULL){
+    if(file == NULL){
         return NULL;
     }
 
@@ -144,12 +144,12 @@ Veiculo **ler(char *caminhoArquivo){
     fgets(s, sizeof(s), file);
     int count = 0;
 
-    while (fgets(s, sizeof(s), file) != NULL){
+    while(fgets(s, sizeof(s), file) != NULL){
         veiculos[count] = parseVeiculo(s);
         count++;
     }
 
-    while (count < 600){
+    while(count < 600){
         veiculos[count] = NULL;
         count++;
     }
@@ -161,10 +161,10 @@ Veiculo **ler(char *caminhoArquivo){
 // --------------- Quicksort Comparison Function ---------------
 
 int compare(Veiculo *i, Veiculo *pivo){
-    if (i->consumoEstrada < pivo->consumoEstrada){
+    if(i->consumoEstrada < pivo->consumoEstrada){
         return -1;
     }
-    else if (i->consumoEstrada > pivo->consumoEstrada){
+    else if(i->consumoEstrada > pivo->consumoEstrada){
         return 1;
     }
 
@@ -179,16 +179,16 @@ void quicksort(Veiculo **array, int esq, int dir){
 
     Veiculo *pivo = array[((esq + dir)/2)];
 
-    while (i <= j){
-        while (compare(array[i], pivo) < 0){
+    while(i <= j){
+        while(compare(array[i], pivo) < 0){
             i++;
         }
 
-        while (compare(array[j], pivo) > 0){
+        while(compare(array[j], pivo) > 0){
             j--;
         }
 
-        if (i <= j){
+        if(i <= j){
             Veiculo *aux = array[i];
             array[i] = array[j];
             array[j] = aux;
@@ -198,11 +198,11 @@ void quicksort(Veiculo **array, int esq, int dir){
         }
     }
 
-    if (esq < j){
+    if(esq < j){
         quicksort(array, esq, j);
     }
 
-    if (i < dir){
+    if(i < dir){
         quicksort(array, i, dir);
     }
 }
@@ -213,7 +213,7 @@ int main(){
     Veiculo **veiculos = ler("/tmp/veiculos.csv");
     Veiculo **sorted = (Veiculo **) malloc(600 * sizeof(Veiculo *));
 
-    if (veiculos == NULL){
+    if(veiculos == NULL){
         printf("File not found\n");
 
         return 1;
@@ -225,12 +225,12 @@ int main(){
     int i = 0;
     int count = 0;
 
-    while (num != -1){ 
-        while (veiculos[i] != NULL && veiculos[i]->id != num){
+    while(num != -1){ 
+        while(veiculos[i] != NULL && veiculos[i]->id != num){
             i++;
         }
 
-        if (veiculos[i] != NULL){
+        if(veiculos[i] != NULL){
             sorted[count] = veiculos[i];
             count++;
         }
@@ -242,14 +242,15 @@ int main(){
 
     quicksort(sorted, 0, (count - 1));
 
-    for (int i = 0; i < count; i++){
+    for(int i = 0; i < count; i++){
         char formatted[1000];
+
         format(sorted[i], formatted);
         printf("%s\n", formatted);
     }
 
-    for (int i = 0; i < 600; i++){
-        if (veiculos[i] != NULL){
+    for(int i = 0; i < 600; i++){
+        if(veiculos[i] != NULL){
             free(veiculos[i]);
         }
     }
