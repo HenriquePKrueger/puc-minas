@@ -160,31 +160,31 @@ Veiculo **ler(char *caminhoArquivo){
 
 // --------------- Quicksort Comparison Function ---------------
 
-int compare(Veiculo *i, Veiculo *pivo){
-    if(i->consumoEstrada < pivo->consumoEstrada){
+int compare(Veiculo *a, Veiculo *b){
+    if(a->consumoEstrada < b->consumoEstrada){
         return -1;
     }
-    else if(i->consumoEstrada > pivo->consumoEstrada){
+    else if(a->consumoEstrada > b->consumoEstrada){
         return 1;
     }
 
-    return strcmp(i->marca, pivo->marca);
+    return strcmp(a->marca, b->marca);
 }
 
 // =============== Quicksort ===============
 
-void quicksort(Veiculo **array, int esq, int dir){
-    int i = esq;
-    int j = dir;
+void quicksort(Veiculo **array, int left, int right){
+    int i = left;
+    int j = right;
 
-    Veiculo *pivo = array[((esq + dir)/2)];
+    Veiculo *pivot = array[(left + right) / 2];
 
     while(i <= j){
-        while(compare(array[i], pivo) < 0){
+        while(compare(array[i], pivot) < 0){
             i++;
         }
 
-        while(compare(array[j], pivo) > 0){
+        while(compare(array[j], pivot) > 0){
             j--;
         }
 
@@ -198,12 +198,12 @@ void quicksort(Veiculo **array, int esq, int dir){
         }
     }
 
-    if(esq < j){
-        quicksort(array, esq, j);
+    if(left < j){
+        quicksort(array, left, j);
     }
 
-    if(i < dir){
-        quicksort(array, i, dir);
+    if(i < right){
+        quicksort(array, i, right);
     }
 }
 
