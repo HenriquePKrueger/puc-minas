@@ -67,7 +67,7 @@ class LeitorCsv{
 class Sorting{
 	public static int k = 10; // Partial sorting limit
 
-    // --------------- Insertion Sort ---------------
+    // --------------- Partial Insertion Sort ---------------
 
     public static void insertionSort(Veiculo[] vehicles, int size){
 		for(int i = 1; i < size; i++){
